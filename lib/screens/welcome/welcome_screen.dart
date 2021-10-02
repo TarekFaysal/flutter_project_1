@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key key}) : super(key: key);
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  int counter = 0;
+  Color myColor = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +32,34 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         body: Container(
-          width: 350,
-          height: 350,
-          color: Colors.yellow,
           child: Column(children: [
             Row(children: [
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(30),
                 color: Colors.green,
                 padding: EdgeInsets.all(30),
-                child: Text("Dhaka"),
+                child: Text("Dhaka " + counter.toString()),
               ),
               Container(
                 margin: EdgeInsets.all(20),
-                color: Colors.red,
+                //color: Colors.red,
                 padding: EdgeInsets.all(30),
-                child: Text("Barisal"),
+                child: TextButton(
+                  child: Text(
+                    "text button",
+                    style: TextStyle(color: myColor, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      counter = counter + 1;
+                      if (myColor == Colors.red) {
+                        myColor = Colors.blue;
+                      } else {
+                        myColor = Colors.red;
+                      }
+                    });
+                  },
+                ),
               ),
             ]),
             Row(children: [
@@ -51,9 +71,18 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.all(20),
-                color: Colors.blue,
+                //color: Colors.blue,
                 padding: EdgeInsets.all(30),
-                child: Text("Mymensingh"),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue)),
+                  child: Text(
+                    "Elevated Button",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: null,
+                ),
               ),
             ]),
           ]),
