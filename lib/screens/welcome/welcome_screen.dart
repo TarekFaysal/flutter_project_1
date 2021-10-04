@@ -32,59 +32,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
         ),
         body: Container(
-          child: Column(children: [
-            Row(children: [
-              Container(
-                margin: EdgeInsets.all(30),
-                color: Colors.green,
-                padding: EdgeInsets.all(30),
-                child: Text("Dhaka " + counter.toString()),
+          color: Colors.yellow,
+          child: ListView(children: [
+            ListTile(
+              dense: true,
+              onTap: () {},
+              tileColor: Colors.blue,
+              leading: CircleAvatar(
+                backgroundImage: AssetImage("asset/images/flower.jpeg"),
               ),
-              Container(
-                margin: EdgeInsets.all(20),
-                //color: Colors.red,
-                padding: EdgeInsets.all(30),
-                child: TextButton(
-                  child: Text(
-                    "text button",
-                    style: TextStyle(color: myColor, fontSize: 20),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      counter = counter + 1;
-                      if (myColor == Colors.red) {
-                        myColor = Colors.blue;
-                      } else {
-                        myColor = Colors.red;
-                      }
-                    });
-                  },
-                ),
-              ),
-            ]),
-            Row(children: [
-              Container(
-                margin: EdgeInsets.all(20),
-                color: Colors.red,
-                padding: EdgeInsets.all(30),
-                child: Text("Sylhet"),
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                //color: Colors.blue,
-                padding: EdgeInsets.all(30),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue)),
-                  child: Text(
-                    "Elevated Button",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: null,
-                ),
-              ),
-            ]),
+              title: Text("This is the title"),
+              subtitle: Text("This is the subtitle"),
+              trailing: Icon(Icons.keyboard_arrow_right),
+            ),
+            ListTile(
+              enabled: false,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(110.0)),
+              onTap: () {},
+              //  tileColor: Colors.red,
+              leading: Icon(Icons.favorite),
+              title: Text("This is the title"),
+              subtitle: Text("This is the subtitle"),
+              trailing: Icon(Icons.access_alarm_rounded),
+            ),
           ]),
         ));
   }
