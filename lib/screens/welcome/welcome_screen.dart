@@ -8,55 +8,63 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  int counter = 0;
-  Color myColor = Colors.red;
+  List<String> names = ["Mohebbullah", "Shakil", "Tarek", "Jihad", "jihad3"];
+
+  List<String> phoneNumbers = [
+    "01567883675",
+    "01734657837",
+    "01837593756",
+    "01748572647",
+    "01346756788"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black87,
           centerTitle: true,
           title:
-              Text("Dhaka, Bangladesh", style: TextStyle(color: Colors.green)),
+              Text("Dhaka, Bangladesh", style: TextStyle(color: Colors.white)),
           actions: [
             IconButton(
                 icon: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+                  Icons.add,
+                  color: Colors.white,
                 ),
-                onPressed: null),
+                onPressed: () {
+                  setState(() {
+                    if (names.length < 20) {
+                      names.add("Hridoy");
+                      phoneNumbers.add("01456767865");
+                    }
+                  });
+                }),
           ],
           leading: IconButton(
-            onPressed: null,
-            icon: Icon(Icons.arrow_back, color: Colors.blue),
+            onPressed: () {
+              setState(() {
+                if (names.length != 0) {
+                  names.remove(names.last);
+                  phoneNumbers.remove(phoneNumbers.last);
+                }
+              });
+            },
+            icon: Icon(Icons.delete, color: Colors.white),
           ),
         ),
-        body: Container(
-          color: Colors.yellow,
-          child: ListView(children: [
-            ListTile(
-              dense: true,
-              onTap: () {},
-              tileColor: Colors.blue,
-              leading: CircleAvatar(
-                backgroundImage: AssetImage("asset/images/flower.jpeg"),
-              ),
-              title: Text("This is the title"),
-              subtitle: Text("This is the subtitle"),
-              trailing: Icon(Icons.keyboard_arrow_right),
-            ),
-            ListTile(
-              enabled: false,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(110.0)),
-              onTap: () {},
-              //  tileColor: Colors.red,
-              leading: Icon(Icons.favorite),
-              title: Text("This is the title"),
-              subtitle: Text("This is the subtitle"),
-              trailing: Icon(Icons.access_alarm_rounded),
-            ),
-          ]),
-        ));
+        body: ListView.builder(
+            itemCount: names.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage("asset/images/flower.jpeg"),
+                ),
+                tileColor: (index % 2 == 0) ? Colors.black45 : Colors.black12,
+                title: Text(names[index]),
+                subtitle: Text(phoneNumbers[index]),
+                trailing: Icon(Icons.keyboard_arrow_right),
+              );
+            }));
   }
 }
