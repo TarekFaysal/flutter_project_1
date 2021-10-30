@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -8,63 +9,80 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  List<String> names = ["Mohebbullah", "Shakil", "Tarek", "Jihad", "jihad3"];
-
-  List<String> phoneNumbers = [
-    "01567883675",
-    "01734657837",
-    "01837593756",
-    "01748572647",
-    "01346756788"
-  ];
-
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black87,
-          centerTitle: true,
-          title:
-              Text("Dhaka, Bangladesh", style: TextStyle(color: Colors.white)),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {
-                    if (names.length < 20) {
-                      names.add("Hridoy");
-                      phoneNumbers.add("01456767865");
-                    }
-                  });
-                }),
-          ],
-          leading: IconButton(
-            onPressed: () {
-              setState(() {
-                if (names.length != 0) {
-                  names.remove(names.last);
-                  phoneNumbers.remove(phoneNumbers.last);
-                }
-              });
-            },
-            icon: Icon(Icons.delete, color: Colors.white),
+        body: Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 120,
           ),
-        ),
-        body: ListView.builder(
-            itemCount: names.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage("asset/images/flower.jpeg"),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (EmailValidator.validate(value)) {
+                      return null;
+                    } else {
+                      return "Please enter a valid email";
+                    }
+                  },
+                  controller: emailTextEditingController,
+                  decoration: InputDecoration(
+                      hintText: "example@email.com", labelText: "Email *"),
                 ),
-                tileColor: (index % 2 == 0) ? Colors.black45 : Colors.black12,
-                title: Text(names[index]),
-                subtitle: Text(phoneNumbers[index]),
-                trailing: Icon(Icons.keyboard_arrow_right),
-              );
-            }));
+                TextFormField(
+                  obscureText: showPassword,
+                  validator: (value) {
+                    if (value.length > 6) {
+                      return null;
+                    } else {
+                      return "password must be a minimum of 6 characters";
+                    }
+                  },
+                  controller: passwordTextEditingController,
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (showPassword == true) {
+                              showPassword = false;
+                            } else {
+                              showPassword = true;
+                            }
+                          });
+                        },
+                        icon: showPassword
+                            ? Icon(Icons.face)
+                            : Icon(Icons.favorite),
+                      ),
+                      labelStyle: TextStyle(),
+                      hintText: "******",
+                      labelText: "Password *"),
+                )
+              ],
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  String email = emailTextEditingController.text;
+                  String password = passwordTextEditingController.text;
+                  print(email);
+                  print(password);
+                }
+              },
+              child: Text("Submit")),
+        ],
+      ),
+    ));
   }
 }
