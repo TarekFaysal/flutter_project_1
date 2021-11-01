@@ -12,6 +12,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController firstNameTextEditingController =
+      TextEditingController();
+  TextEditingController lastNameTextEditingController = TextEditingController();
+  TextEditingController phoneNumberTextEditingController =
+      TextEditingController();
+  TextEditingController descriptionTextEditingController =
+      TextEditingController();
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +74,49 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       labelStyle: TextStyle(),
                       hintText: "******",
                       labelText: "Password *"),
-                )
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value.isNotEmpty) {
+                      return null;
+                    } else {
+                      return "Please enter first name";
+                    }
+                  },
+                  controller: firstNameTextEditingController,
+                  decoration: InputDecoration(
+                      hintText: "first name", labelText: "first name *"),
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value.isNotEmpty) {
+                      return null;
+                    } else {
+                      return "Please enter last name";
+                    }
+                  },
+                  controller: lastNameTextEditingController,
+                  decoration: InputDecoration(
+                      hintText: "last name", labelText: "last name *"),
+                ),
+                TextFormField(
+                  validator: (value) {
+                    // print(value.length);
+                    if (value.length == 11) {
+                      return null;
+                    } else {
+                      return "Phone Number must be 11 numbers";
+                    }
+                  },
+                  controller: phoneNumberTextEditingController,
+                  decoration: InputDecoration(
+                      hintText: "Phone Number", labelText: "Phone Number *"),
+                ),
+                TextFormField(
+                  controller: descriptionTextEditingController,
+                  decoration: InputDecoration(
+                      hintText: "Description", labelText: "Description"),
+                ),
               ],
             ),
           ),
@@ -76,11 +125,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 if (_formKey.currentState.validate()) {
                   String email = emailTextEditingController.text;
                   String password = passwordTextEditingController.text;
+                  String phone = phoneNumberTextEditingController.text;
                   print(email);
                   print(password);
+                  print(phone);
                 }
               },
-              child: Text("Submit")),
+              child: Text("Sign Up")),
         ],
       ),
     ));
