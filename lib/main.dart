@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_1/screens/create_note/create_note_screen.dart';
 import 'package:flutter_project_1/screens/note_details/note_details_screen.dart';
 import 'package:flutter_project_1/screens/notes/notes_screen.dart';
 
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: NotesScreen(),
-      routes: {NoteDetailsScreen.routeName: (ctx) => NoteDetailsScreen()},
+      routes: {
+        NoteDetailsScreen.routeName: (ctx) => NoteDetailsScreen(),
+        CreateNoteScreen.routeName: (ctx) => CreateNoteScreen()
+      },
     );
   }
 }
