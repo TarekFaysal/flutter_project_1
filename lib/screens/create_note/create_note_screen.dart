@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_1/model/note.dart';
+import 'package:flutter_project_1/screens/notes/notes_screen.dart';
 
 class CreateNoteScreen extends StatefulWidget {
   static const routeName = "/createNote";
@@ -26,6 +28,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
             child: Column(
               children: [
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyText1,
                   validator: (value) {
                     if (value.isNotEmpty) {
                       return null;
@@ -34,10 +37,15 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                     }
                   },
                   controller: titleEditingController,
-                  decoration:
-                      InputDecoration(hintText: "Title", labelText: "Title *"),
+                  decoration: InputDecoration(
+                    hintText: "Title",
+                    labelText: "Title *",
+                    hintStyle: Theme.of(context).textTheme.bodyText2,
+                    labelStyle: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyText1,
                   validator: (value) {
                     if (value.isNotEmpty) {
                       return null;
@@ -47,7 +55,11 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                   },
                   controller: descriptionEditingController,
                   decoration: InputDecoration(
-                      hintText: "Dexcription", labelText: "Description *"),
+                    hintText: "Description",
+                    labelText: "Description *",
+                    hintStyle: Theme.of(context).textTheme.bodyText2,
+                    labelStyle: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
                 ElevatedButton(
                     onPressed: () {
@@ -55,6 +67,13 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                         String title = titleEditingController.text;
                         String description = descriptionEditingController.text;
                         print(title + description);
+
+                        Note note = Note(title, description);
+                        Note.notes.add(note);
+
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(
+                            context, NotesScreen.routeName);
                       }
                     },
                     child: Text("Create"))

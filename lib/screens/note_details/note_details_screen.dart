@@ -16,7 +16,7 @@ class NoteDetailsScreen extends StatelessWidget {
           margin: EdgeInsets.all(15),
           child: Text(
             note.description,
-            style: TextStyle(fontSize: 20),
+            style: Theme.of(context).textTheme.bodyText1,
           )),
     );
   }
