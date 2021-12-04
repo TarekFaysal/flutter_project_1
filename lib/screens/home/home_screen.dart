@@ -3,7 +3,7 @@ import 'package:flutter_project_1/model/newspaper.dart';
 import 'package:flutter_project_1/screens/webview/webview_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     image: AssetImage("asset/images/" +
-                        NewsPaper.newspapers[index].imageName)),
+                        NewsPaper.newspapers[index].imageName!)),
               ),
             );
           },

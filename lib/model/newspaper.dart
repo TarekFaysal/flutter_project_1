@@ -1,5 +1,5 @@
 class NewsPaper {
-  String title, link, imageName;
+  String? title, link, imageName;
 
   NewsPaper({this.title, this.link, this.imageName});
 

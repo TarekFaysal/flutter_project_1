@@ -4,7 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
   static const routeName = "/webview";
-  const WebViewScreen({Key key}) : super(key: key);
+  const WebViewScreen({Key? key}) : super(key: key);
 
   @override
   _WebViewScreenState createState() => _WebViewScreenState();
@@ -12,19 +12,19 @@ class WebViewScreen extends StatefulWidget {
 
 class _WebViewScreenState extends State<WebViewScreen> {
   bool _isLoading = true;
-  WebViewController _controller;
+  WebViewController? _controller;
   @override
   Widget build(BuildContext context) {
     NewsPaper newsPaper =
-        ModalRoute.of(context).settings.arguments as NewsPaper;
+        ModalRoute.of(context)!.settings.arguments as NewsPaper;
     print(newsPaper.link);
     return Scaffold(
         appBar: AppBar(
-          title: Text(newsPaper.title),
+          title: Text(newsPaper.title!),
         ),
         body: Stack(children: [
           WebView(
-            initialUrl: "https://" + newsPaper.link,
+            initialUrl: "https://" + newsPaper.link!,
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (controller) {
               _controller = controller;
