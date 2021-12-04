@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_1/screens/home/home_screen.dart';
-import 'package:flutter_project_1/screens/webview/webview_screen.dart';
+import 'package:flutter_project_1/screens/welcome/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,8 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomeScreen(),
-      routes: {WebViewScreen.routeName: (ctx) => WebViewScreen()},
+      home: WelcomeScreen(),
+      routes: {
+        HomeScreen.routeName: (ctx) => HomeScreen(),
+        WelcomeScreen.routeName: (ctx) => WelcomeScreen()
+      },
     );
   }
 }
